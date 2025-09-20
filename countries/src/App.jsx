@@ -14,16 +14,19 @@ const Result = ({filteredCountries, onShow}) => {
 
     if (filteredCountries.length === 1) {
         const country = filteredCountries[0];
+        console.log(country.languages)
         return (
             <div>
                 <h2>{country.name.common}</h2>
                 <p>Capital : {country.capital}</p>
                 <p>population : {country.population}</p>
                 <h2>Languages</h2>
-                {Object.values(country.languages || {}).map((lang, i) => (
-                    <li key={i}>{lang}</li>
-                ))}
-                <img alt={`Drapeau de ${country.name.common}`} src={country.flag}/>
+                <div>
+                    {Object.values(country.languages || {}).map((lang, i) => (
+                        <li key={i}>{lang}</li>
+                    ))}
+                </div>
+                <img alt={`${country.flags.alt}`} src={country.flags.png}/>
             </div>)
     }
 
@@ -42,7 +45,7 @@ function App() {
     const [search, setSearch] = useState('')
 
     useEffect(() => {
-        axios.get('https://restcountries.com/v3.1/all?fields=name,capital,population,flag,languages')
+        axios.get('https://restcountries.com/v3.1/all?fields=name,capital,population,flags,languages')
             .then(response => {
                 setCountries(response.data)
             })
