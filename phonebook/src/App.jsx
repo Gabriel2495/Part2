@@ -34,7 +34,7 @@ function App() {
     const personsToShow = search === '' ? persons : filteredPersons
 
     const handleSearch = (event) => {
-        e.preventDefault()
+        event.preventDefault()
         setSearch(event.target.value)
     }
 
